@@ -1,3 +1,8 @@
+create user Employee identified by employee;
+grant all privileges to Employee;
+grant create session to Employee;
+grant unlimited tablespace to Employee;
+
 
 create table EmployeeDetails (
 Emp_id int not null primary key,
