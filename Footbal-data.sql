@@ -1,3 +1,8 @@
+create user football identified by play;
+grant all privileges to football;
+grant create session to football;
+grant create table to football;
+
 create table FootballVenue(
 venue_id int not null primary key,
 venue_name varchar(30) not null,
