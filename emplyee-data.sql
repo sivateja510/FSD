@@ -35,10 +35,10 @@ insert into EmployeeDetails values(886,'satwik','programer',178,'10-feb-2022',48
 insert into EmployeeDetails values(876,'raj','designer',182,'10-feb-2014',42547,6974);
 
 
---select Salary from EmployeeDetails;
+select Salary from EmployeeDetails;
 
---select distinct Job_name from EmployeeDetails;
+select distinct Job_name from EmployeeDetails;
 
---update EmployeeDetails set Salary= 45000 where Emp_name ='raj';
+update EmployeeDetails set Salary= 45000 where Emp_name ='raj';
 
 
