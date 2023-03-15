@@ -1,0 +1,859 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Mar 5 10:24:01 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> create table Worker
+  2  (
+  3  Worker_id numder(3),
+  4  First_Name varchar2(20),
+  5  Last_Name varchar2(20),
+  6  salary number(6),
+  7  joining_data date,
+  8  Dept varchar2(20)
+  9  );
+Worker_id numder(3),
+                *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Worker
+  2  (
+  3  Worker_id number(3),
+  4  First_Name varchar2(20),
+  5  Last_Name varchar2(20),
+  6  salary number(6),
+  7  joining_data date,
+  8  Dept varchar2(20)
+  9  );
+
+Table created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 001
+Enter value for b: 'Monika'
+Enter value for c: 'Arora'
+Enter value for d: 100000
+Enter value for e: '20-02-2014'
+Enter value for f: 'hr'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(001,'Monika','Arora',100000,'20-02-2014','hr')
+insert into worker values(001,'Monika','Arora',100000,'20-02-2014','hr')
+                                                      *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 001
+Enter value for b: 'Monika'
+Enter value for c: 'Arora'
+Enter value for d: 100000
+Enter value for e: '20-feb-2014'
+Enter value for f: 'hr'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(001,'Monika','Arora',100000,'20-feb-2014','hr')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 002
+Enter value for b: 'Niharika'
+Enter value for c: 'verma'
+Enter value for d: 80000
+Enter value for e: '20-feb-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(002,'Niharika','verma',80000,'20-feb-2014','Admin')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 003
+Enter value for b: 'Vishal'
+Enter value for c: 'Singhal'
+Enter value for d: 300000
+Enter value for e: '20-feb-2014'
+Enter value for f: 'HR'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(003,'Vishal','Singhal',300000,'20-feb-2014','HR')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 004
+Enter value for b: 'Amiyabh'
+Enter value for c: 'Singh'
+Enter value for d: 500000
+Enter value for e: '20-feb-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(004,'Amiyabh','Singh',500000,'20-feb-2014','Admin')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 005
+Enter value for b: 'Vivek'
+Enter value for c: 'Bhati'
+Enter value for d: 500000
+Enter value for e: 11-june-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(005,'Vivek','Bhati',500000,11-june-2014','Admin')
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 005
+Enter value for b: 'Vivek'
+Enter value for c: 'Bhati'
+Enter value for d: 500000
+Enter value for e: '11-june-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(005,'Vivek','Bhati',500000,'11-june-2014','Admin')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 006
+Enter value for b: 'Vipul'
+Enter value for c: 'Diwan'
+Enter value for d: 200000
+Enter value for e: '11-june-2014'
+Enter value for f: 'Account'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(006,'Vipul','Diwan',200000,'11-june-2014','Account')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 007
+Enter value for b: 'Satish'
+Enter value for c: 'Kumar'
+Enter value for d: 75000
+Enter value for e: 20-jan-2014'
+Enter value for f: 'Account'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(007,'Satish','Kumar',75000,20-jan-2014','Account')
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 007
+Enter value for b: 'Satish'
+Enter value for c: 'Kumar'
+Enter value for d: 75000
+Enter value for e: 20-jan-2014'
+Enter value for f: 20-jan-2014'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(007,'Satish','Kumar',75000,20-jan-2014',20-jan-2014')
+insert into worker values(007,'Satish','Kumar',75000,20-jan-2014',20-jan-2014')
+                                                                *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 007
+Enter value for b: 'Satish'
+Enter value for c: 'Kumar'
+Enter value for d: 75000
+Enter value for e: '20-jan-2014'
+Enter value for f: 'Account'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(007,'Satish','Kumar',75000,'20-jan-2014','Account')
+
+1 row created.
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 008
+Enter value for b: 'Geetika'
+Enter value for c: 'chauhan'
+Enter value for d: 90000
+Enter value for e: 11-april-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(008,'Geetika','chauhan',90000,11-april-2014','Admin')
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into worker values(&a,&b,&c,&d,&e,&f);
+Enter value for a: 008
+Enter value for b: 'Geetika'
+Enter value for c: 'chauhan'
+Enter value for d: 90000
+Enter value for e: '11-april-2014'
+Enter value for f: 'Admin'
+old   1: insert into worker values(&a,&b,&c,&d,&e,&f)
+new   1: insert into worker values(008,'Geetika','chauhan',90000,'11-april-2014','Admin')
+
+1 row created.
+
+SQL> desc worker;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WORKER_ID                                          NUMBER(3)
+ FIRST_NAME                                         VARCHAR2(20)
+ LAST_NAME                                          VARCHAR2(20)
+ SALARY                                             NUMBER(6)
+ JOINING_DATA                                       DATE
+ DEPT                                               VARCHAR2(20)
+
+SQL> select * from worker;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amiyabh              Singh                    500000 20-FEB-14
+Admin
+
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+
+8 rows selected.
+
+SQL> select first_name from worker;
+
+FIRST_NAME
+--------------------
+Monika
+Niharika
+Vishal
+Amiyabh
+Vivek
+Vipul
+Satish
+Geetika
+
+8 rows selected.
+
+SQL>
+SQL> select first_name as Worker Name from worker;
+select first_name as Worker Name from worker
+                            *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select first_name as WorkerName from worker;
+
+WORKERNAME
+--------------------
+Monika
+Niharika
+Vishal
+Amiyabh
+Vivek
+Vipul
+Satish
+Geetika
+
+8 rows selected.
+
+SQL> update set first_name='Amitabh' from worker where first_name='Amiyabh';
+update set first_name='Amitabh' from worker where first_name='Amiyabh'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> update first_name='Amitabh' from worker where first_name='Amiyabh';
+update first_name='Amitabh' from worker where first_name='Amiyabh'
+                 *
+ERROR at line 1:
+ORA-00971: missing SET keyword
+
+
+SQL> update worker set first_name='Amitabh' where first_name='Amiyabh';
+
+1 row updated.
+
+SQL> desc worker;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WORKER_ID                                          NUMBER(3)
+ FIRST_NAME                                         VARCHAR2(20)
+ LAST_NAME                                          VARCHAR2(20)
+ SALARY                                             NUMBER(6)
+ JOINING_DATA                                       DATE
+ DEPT                                               VARCHAR2(20)
+
+SQL> select * from worker;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+
+8 rows selected.
+
+SQL> select first_name as Worker Name from worker;
+select first_name as Worker Name from worker
+                            *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select first_name as WorkerName from worker;
+
+WORKERNAME
+--------------------
+Monika
+Niharika
+Vishal
+Amitabh
+Vivek
+Vipul
+Satish
+Geetika
+
+8 rows selected.
+
+SQL> select position("A" in first_name)from worker where first_name='Amitabh';
+select position("A" in first_name)from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select position("A" IN first_name) from worker where first_name='Amitabh';
+select position("A" IN first_name) from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select position("a" IN first_name) from worker where first_name='Amitabh';
+select position("a" IN first_name) from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select POSITION("a" IN first_name) from worker where first_name='Amitabh';
+select POSITION("a" IN first_name) from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select POSITION("a") from worker where first_name='Amitabh';
+select POSITION("a") from worker where first_name='Amitabh'
+       *
+ERROR at line 1:
+ORA-00904: "POSITION": invalid identifier
+
+
+SQL> select POSITION("a" (IN) first_name) from worker where first_name='Amitabh';
+select POSITION("a" (IN) first_name) from worker where first_name='Amitabh'
+                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select POSITION("a" (IN first_name) from worker where first_name='Amitabh';
+select POSITION("a" (IN first_name) from worker where first_name='Amitabh'
+                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select POSITION("a" IN first_name) from worker where first_name='Amitabh';
+select POSITION("a" IN first_name) from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select POSITION('a' IN first_name) from worker where first_name='Amitabh';
+select POSITION('a' IN first_name) from worker where first_name='Amitabh'
+                    *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select INSTR(first_name,BINARY'a') from worker where first_name='Amitabh';
+select INSTR(first_name,BINARY'a') from worker where first_name='Amitabh'
+                              *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select INSTR(first_name,'a') from worker where first_name='Amitabh';
+
+INSTR(FIRST_NAME,'A')
+---------------------
+                    5
+
+SQL> select REPLACE(first_name,'a','A')from worker;
+
+REPLACE(FIRST_NAME,'
+--------------------
+MonikA
+NihArikA
+VishAl
+AmitAbh
+Vivek
+Vipul
+SAtish
+GeetikA
+
+8 rows selected.
+
+SQL> select * from worker Order by First_name asc;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+
+8 rows selected.
+
+SQL> select * from worker Order by First_name asc and Order by dept desc;
+select * from worker Order by First_name asc and Order by dept desc
+                                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from worker Order by First_name asc, Order by dept desc;
+select * from worker Order by First_name asc, Order by dept desc
+                                              *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from worker Order by First_name asc,dept desc;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+
+8 rows selected.
+
+SQL> select * from table where first_name='Vipul' or first_name='Satish';
+select * from table where first_name='Vipul' or first_name='Satish'
+                    *
+ERROR at line 1:
+ORA-00906: missing left parenthesis
+
+
+SQL> select * from worker where first_name='Vipul' or first_name='Satish';
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+
+SQL> select * ,dept as Admin from worker;
+select * ,dept as Admin from worker
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select (*),dept as Admin from worker;
+select (*),dept as Admin from worker
+        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select dept as Admin from worker;
+
+ADMIN
+--------------------
+hr
+Admin
+HR
+Admin
+Admin
+Account
+Account
+Admin
+
+8 rows selected.
+
+SQL> select (*) from worker where dept like 'ADMIN%';
+select (*) from worker where dept like 'ADMIN%'
+        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from worker where dept like 'ADMIN%';
+
+no rows selected
+
+SQL> select * from worker where dept like 'Admin%';
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+
+SQL> select * from worker where first_name like'%a%;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> select * from worker where first_name like'%a%';
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+         2 Niharika             verma                     80000 20-FEB-14
+Admin
+
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+         8 Geetika              chauhan                   90000 11-APR-14
+Admin
+
+
+6 rows selected.
+
+SQL> select * from worker where first_name like'%A%';
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+
+SQL> select * from worker where salary between 100000 and 500000;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         1 Monika               Arora                    100000 20-FEB-14
+hr
+
+         3 Vishal               Singhal                  300000 20-FEB-14
+HR
+
+         4 Amitabh              Singh                    500000 20-FEB-14
+Admin
+
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         5 Vivek                Bhati                    500000 11-JUN-14
+Admin
+
+         6 Vipul                Diwan                    200000 11-JUN-14
+Account
+
+
+SQL> select * from worker where first_name like %h and len(first_name)=6;
+select * from worker where first_name like %h and len(first_name)=6
+                                           *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select * from worker where first_name like '%h' and len(first_name)=6;
+select * from worker where first_name like '%h' and len(first_name)=6
+                                                    *
+ERROR at line 1:
+ORA-00904: "LEN": invalid identifier
+
+
+SQL> select * from worker where first_name like '%h' and length(first_name)=6;
+
+ WORKER_ID FIRST_NAME           LAST_NAME                SALARY JOINING_D
+---------- -------------------- -------------------- ---------- ---------
+DEPT
+--------------------
+         7 Satish               Kumar                     75000 20-JAN-14
+Account
+
+
+SQL> select * from worker where year(joining_data)=2014 and month(joining_data)=2;
+select * from worker where year(joining_data)=2014 and month(joining_data)=2
+                                                       *
+ERROR at line 1:
+ORA-00904: "MONTH": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014 and month(joining_data)=feb;
+select * from worker where year(joining_data)=2014 and month(joining_data)=feb
+                                                                           *
+ERROR at line 1:
+ORA-00904: "FEB": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014 and month(joining_data)='feb';
+select * from worker where year(joining_data)=2014 and month(joining_data)='feb'
+                                                       *
+ERROR at line 1:
+ORA-00904: "MONTH": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014 and dat(joining_data)='feb';
+select * from worker where year(joining_data)=2014 and dat(joining_data)='feb'
+                                                       *
+ERROR at line 1:
+ORA-00904: "DAT": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014 and day(joining_data)='feb';
+select * from worker where year(joining_data)=2014 and day(joining_data)='feb'
+                                                       *
+ERROR at line 1:
+ORA-00904: "DAY": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014 and year(joining_data)='feb';
+select * from worker where year(joining_data)=2014 and year(joining_data)='feb'
+                                                       *
+ERROR at line 1:
+ORA-00904: "YEAR": invalid identifier
+
+
+SQL> select * from worker where year(joining_data)=2014;
+select * from worker where year(joining_data)=2014
+                           *
+ERROR at line 1:
+ORA-00904: "YEAR": invalid identifier
+
+
+SQL> select concat(first_name,' ',last_name,' ') as worker_name from worker where salary between 500000 and 100000;
+select concat(first_name,' ',last_name,' ') as worker_name from worker where salary between 500000 and 100000
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select first_name as worker_name from worker where salary between 500000 and 100000;
+
+no rows selected
+
+SQL> select first_name as worker_name from worker where salary between 50000 and 100000;
+
+WORKER_NAME
+--------------------
+Monika
+Niharika
+Satish
+Geetika
+
+SQL> select Concat(first_name,last_name) as worker_name from worker where salary between 50000 and 100000;
+
+WORKER_NAME
+----------------------------------------
+MonikaArora
+Niharikaverma
+SatishKumar
+Geetikachauhan
+
+SQL> select Concat(first_name,' ',last_name) as worker_name from worker where salary between 50000 and 100000;
+select Concat(first_name,' ',last_name) as worker_name from worker where salary between 50000 and 100000
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select Concat(first_name,'',last_name) as worker_name from worker where salary between 50000 and 100000;
+select Concat(first_name,'',last_name) as worker_name from worker where salary between 50000 and 100000
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select Concat(first_name,last_name) as worker_name from worker where salary between 50000 and 100000;
+
+WORKER_NAME
+----------------------------------------
+MonikaArora
+Niharikaverma
+SatishKumar
+Geetikachauhan
+
+SQL>
