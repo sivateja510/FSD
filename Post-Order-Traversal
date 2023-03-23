@@ -1,0 +1,18 @@
+class Tree {
+    static void traverse(Node root,ArrayList<Integer> l){
+    if(root==null){
+        return;
+    }
+    
+    
+    traverse(root.left,l);
+    traverse(root.right,l);
+    l.add(root.data);
+    }
+    ArrayList<Integer> postOrder(Node node) {
+        // code here
+        ArrayList<Integer> l=new ArrayList<Integer>();
+        traverse(node,l);
+        return l;
+    }
+}
