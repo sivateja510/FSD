@@ -1,21 +1,46 @@
-import * as React from 'react';
-import { Action, UNSAFE_invariant, isRouteErrorResponse, createStaticHandler as createStaticHandler$1, UNSAFE_convertRoutesToDataRoutes, IDLE_NAVIGATION, IDLE_FETCHER, IDLE_BLOCKER } from '@remix-run/router';
-import { parsePath, Router, UNSAFE_DataRouterContext, UNSAFE_DataRouterStateContext, Routes, createPath } from 'react-router-dom';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+var router = require('@remix-run/router');
+var reactRouterDom = require('react-router-dom');
+
+function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+        Object.keys(e).forEach(function (k) {
+            if (k !== 'default') {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+}
+
+var React__namespace = /*#__PURE__*/_interopNamespace(React);
 
 /**
  * A <Router> that may not navigate to any other location. This is useful
  * on the server where there is no stateful UI.
  */
+
 function StaticRouter({
   basename,
   children,
   location: locationProp = "/"
 }) {
   if (typeof locationProp === "string") {
-    locationProp = parsePath(locationProp);
+    locationProp = reactRouterDom.parsePath(locationProp);
   }
 
-  let action = Action.Pop;
+  let action = router.Action.Pop;
   let location = {
     pathname: locationProp.pathname || "/",
     search: locationProp.search || "",
@@ -24,7 +49,7 @@ function StaticRouter({
     key: locationProp.key || "default"
   };
   let staticNavigator = getStatelessNavigator();
-  return /*#__PURE__*/React.createElement(Router, {
+  return /*#__PURE__*/React__namespace.createElement(reactRouterDom.Router, {
     basename: basename,
     children: children,
     location: location,
@@ -33,20 +58,20 @@ function StaticRouter({
     static: true
   });
 }
-
 /**
  * A Data Router that may not navigate to any other location. This is useful
  * on the server where there is no stateful UI.
  */
+
 function StaticRouterProvider({
   context,
-  router,
+  router: router$1,
   hydrate = true,
   nonce
 }) {
-  !(router && context) ? process.env.NODE_ENV !== "production" ? UNSAFE_invariant(false, "You must provide `router` and `context` to <StaticRouterProvider>") : UNSAFE_invariant(false) : void 0;
+  !(router$1 && context) ? process.env.NODE_ENV !== "production" ? router.UNSAFE_invariant(false, "You must provide `router` and `context` to <StaticRouterProvider>") : router.UNSAFE_invariant(false) : void 0;
   let dataRouterContext = {
-    router,
+    router: router$1,
     navigator: getStatelessNavigator(),
     static: true,
     staticContext: context,
@@ -68,16 +93,16 @@ function StaticRouterProvider({
     hydrateScript = `window.__staticRouterHydrationData = JSON.parse(${json});`;
   }
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(UNSAFE_DataRouterContext.Provider, {
+  return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement(reactRouterDom.UNSAFE_DataRouterContext.Provider, {
     value: dataRouterContext
-  }, /*#__PURE__*/React.createElement(UNSAFE_DataRouterStateContext.Provider, {
+  }, /*#__PURE__*/React__namespace.createElement(reactRouterDom.UNSAFE_DataRouterStateContext.Provider, {
     value: dataRouterContext.router.state
-  }, /*#__PURE__*/React.createElement(Router, {
+  }, /*#__PURE__*/React__namespace.createElement(reactRouterDom.Router, {
     basename: dataRouterContext.basename,
     location: dataRouterContext.router.state.location,
     navigationType: dataRouterContext.router.state.historyAction,
     navigator: dataRouterContext.navigator
-  }, /*#__PURE__*/React.createElement(Routes, null)))), hydrateScript ? /*#__PURE__*/React.createElement("script", {
+  }, /*#__PURE__*/React__namespace.createElement(reactRouterDom.Routes, null)))), hydrateScript ? /*#__PURE__*/React__namespace.createElement("script", {
     suppressHydrationWarning: true,
     nonce: nonce,
     dangerouslySetInnerHTML: {
@@ -94,7 +119,7 @@ function serializeErrors(errors) {
   for (let [key, val] of entries) {
     // Hey you!  If you change this, please change the corresponding logic in
     // deserializeErrors in react-router-dom/index.tsx :)
-    if (isRouteErrorResponse(val)) {
+    if (router.isRouteErrorResponse(val)) {
       serialized[key] = { ...val,
         __type: "RouteErrorResponse"
       };
@@ -143,13 +168,13 @@ function getStatelessNavigator() {
 let detectErrorBoundary = route => Boolean(route.ErrorBoundary) || Boolean(route.errorElement);
 
 function createStaticHandler(routes, opts) {
-  return createStaticHandler$1(routes, { ...opts,
+  return router.createStaticHandler(routes, { ...opts,
     detectErrorBoundary
   });
 }
 function createStaticRouter(routes, context) {
   let manifest = {};
-  let dataRoutes = UNSAFE_convertRoutesToDataRoutes(routes, detectErrorBoundary, undefined, manifest); // Because our context matches may be from a framework-agnostic set of
+  let dataRoutes = router.UNSAFE_convertRoutesToDataRoutes(routes, detectErrorBoundary, undefined, manifest); // Because our context matches may be from a framework-agnostic set of
   // routes passed to createStaticHandler(), we update them here with our
   // newly created/enhanced data routes
 
@@ -169,14 +194,14 @@ function createStaticRouter(routes, context) {
 
     get state() {
       return {
-        historyAction: Action.Pop,
+        historyAction: router.Action.Pop,
         location: context.location,
         matches,
         loaderData: context.loaderData,
         actionData: context.actionData,
         errors: context.errors,
         initialized: true,
-        navigation: IDLE_NAVIGATION,
+        navigation: router.IDLE_NAVIGATION,
         restoreScrollPosition: null,
         preventScrollReset: false,
         revalidation: "idle",
@@ -217,7 +242,7 @@ function createStaticRouter(routes, context) {
     encodeLocation,
 
     getFetcher() {
-      return IDLE_FETCHER;
+      return router.IDLE_FETCHER;
     },
 
     deleteFetcher() {
@@ -229,7 +254,7 @@ function createStaticRouter(routes, context) {
     },
 
     getBlocker() {
-      return IDLE_BLOCKER;
+      return router.IDLE_BLOCKER;
     },
 
     deleteBlocker() {
@@ -247,12 +272,12 @@ function createStaticRouter(routes, context) {
 }
 
 function createHref(to) {
-  return typeof to === "string" ? to : createPath(to);
+  return typeof to === "string" ? to : reactRouterDom.createPath(to);
 }
 
 function encodeLocation(to) {
   // Locations should already be encoded on the server, so just return as-is
-  let path = typeof to === "string" ? parsePath(to) : to;
+  let path = typeof to === "string" ? reactRouterDom.parsePath(to) : to;
   return {
     pathname: path.pathname || "",
     search: path.search || "",
@@ -275,4 +300,7 @@ function htmlEscape(str) {
   return str.replace(ESCAPE_REGEX, match => ESCAPE_LOOKUP[match]);
 }
 
-export { StaticRouter, StaticRouterProvider, createStaticHandler, createStaticRouter };
+exports.StaticRouter = StaticRouter;
+exports.StaticRouterProvider = StaticRouterProvider;
+exports.createStaticHandler = createStaticHandler;
+exports.createStaticRouter = createStaticRouter;
