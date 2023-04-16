@@ -1,0 +1,109 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#cent{
+  margin:auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #92d7e0;
+  color: #fff;
+}
+#hash{
+  color:black;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav li {
+  padding: 10px;
+  list-style: none;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+nav li a {
+  color: #000000;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+}
+#home{
+  padding: 20px;;
+}
+nav li a:hover{
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #ff0000;
+}
+#conta1{
+  /* background-color: beige; */
+  background-color: #cdf4ff;
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;;
+  margin-bottom: 50px;;
+  text-align: center;
+  border-radius: 50px;
+
+}
+.btn{
+  margin:10px;
+  background-color: rgb(55, 97, 83);
+  color:rgb(255, 255, 255);
+  text-align: center;
+}
+#card-body h1 p{
+  color: rgb(0, 0, 0);
+  text-align: center;
+
+}
+.btn:hover{
+  background-color: rgb(84, 216, 135);
+  color:aliceblue
+}
