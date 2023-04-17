@@ -49,9 +49,9 @@ const CreateResume=()=>{
   {
     return(
       <Template firstName={formData.firstName} lastName={formData.lastName} email={formData.email} phone={formData.phone}
-      address={formData.address} c1={formData.c1} c2={formData.c2} s1={formData.s1} s2={formData.s2} scol={formData.schoolname} scgpa={formData.schoolcgpa} syear={formData.syear}
-      s3={formData.s3} role={formData.role} pd1={formData.pjd1} pd2={formData.pjd2} p1={formData.p1} p2={formData.p2}about={formData.about}
-      bcol={formData.bname} bcgpa={formData.bgrade}byear={formData.byear} icol={formData.intercoll} icgpa={formData.intercgpa} c3={formData.c3}iyear={formData.interyear}/>
+      address={formData.address} c1={formData.c1} c2={formData.c2} s1={formData.s1} s2={formData.s2} schoolname={formData.schoolname} schoolcgpa={formData.schoolcgpa} syear={formData.syear}
+      s3={formData.s3} role={formData.role} pjd1={formData.pjd1} pjd2={formData.pjd2} p1={formData.p1} p2={formData.p2}about={formData.about}
+      bname={formData.bname} bgrade={formData.bgrade}byear={formData.byear} intercoll={formData.intercoll} intercgpa={formData.intercgpa} c3={formData.c3}interyear={formData.interyear}/>
     )
   }
     return (
