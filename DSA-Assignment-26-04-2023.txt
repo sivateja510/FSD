@@ -1,0 +1,1276 @@
+26.Longest Palindromic Substring:
+class Solution {
+    public String longestPalindrome(String s) {
+        int s1=0,end=0;
+        for(int i=0; i<s.length(); i++){
+            int o=expand(s,i,i);
+            int e=expand(s,i,i+1);
+            int len=Math.max(o,e);
+            if(len>end-s1){
+                s1=i-(len-1)/2;
+                end=i+len/2;
+            }
+        }
+        return s.substring(s1,end+1);
+    }
+    int expand(String s,int a,int b){
+        while(a>=0 && b<s.length() && s.charAt(a)==s.charAt(b)){
+            a--;
+            b++;
+        }
+        return b-a-1;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+27. Median of Two Sorted Arrays
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        ArrayList<Integer> one=new ArrayList<Integer>();
+        for(int i=0;i<nums1.length;i++)
+        {
+            one.add(nums1[i]);
+        }
+        
+        for(int i=0;i<nums2.length;i++)
+        {
+            one.add(nums2[i]);
+        }
+        Collections.sort(one);   
+        if(one.size()%2==0)
+        {
+            return (double)(one.get(one.size()/2)+one.get(one.size()/2-1))/2;
+        }
+        return (double)one.get(one.size()/2);
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------
+28.Regular Expression Matching
+
+-------------------------------------------------------------------------------------------------------------------------------
+29.Letter Combinations of a Phone Number
+class Solution {
+    String [] arr = new String[]{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    public void printing(int num,String out,ArrayList<String> list)
+    {
+        if(num==0)
+        {
+            list.add(out);
+            return;
+        }
+        int n=num%10;
+        String s=arr[n];
+        for(int i=0;i<s.length();i++)
+        {
+            printing(num/10,s.charAt(i)+out,list);
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        ArrayList<String> list=new ArrayList<String>();
+        String out="";
+        if(digits.length()==0)
+        {
+            return  list;
+        }
+        printing(Integer.parseInt(digits),out,list);
+        // Collections.sort(list);
+        return list;
+        
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+30. Longest Common Prefix
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        sort(strs.begin(),strs.end());
+        int a=strs.size();
+        string ans="";
+        string l=strs[0],e=strs[a-1];
+        for(int i=0;i<l.size();i++)
+        {
+            if(l[i]==e[i])
+            {
+                ans+=e[i];
+            }
+            else
+            {
+                break;
+            }
+        }
+        return ans;
+        
+    }
+};
+-------------------------------------------------------------------------------------------------------------------------------
+31. Valid Parantheses
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<Character>();
+        for(int i=0;i<s.length();i++)
+        {
+            if(st.empty())
+            {
+                st.push(s.charAt(i));
+            }
+            else if(st.peek()=='(' && s.charAt(i)==')')
+            {
+                st.pop();
+            }
+            else if(st.peek()=='[' && s.charAt(i)==']')
+            {
+                st.pop();
+            }
+            else if(st.peek()=='{' && s.charAt(i)=='}')
+            {
+                st.pop();
+            }
+            else
+            {
+                st.push(s.charAt(i));
+            }
+            
+        }
+        return st.empty();
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------
+32.Generate Parantheses
+
+class Solution {
+    List<String> li=new ArrayList<>();
+    public List<String> generateParenthesis(int n) 
+    {
+        char[] s= new char[2*n];
+        printp(n,s,0,0,0);
+        return li;
+    }
+    public void printp(int n,char[] s,int pos,int start,int end)
+    {
+        if(n==end)
+        {
+            String k="";
+            for(int i=0;i<s.length;i++)
+            {
+                k+=s[i];
+            }
+            li.add(k);
+            
+        }
+        else
+        {
+            if(start>end)
+            {
+                s[pos]=')';
+                printp(n,s,pos+1,start,end+1);
+            }
+            if(start <n)
+            {
+                s[pos]='(';
+                printp(n,s,pos+1,start+1,end);
+            }
+        }
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------
+33. Merge k Sorted Lists
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+      ArrayList<Integer> s=new ArrayList<Integer>();
+        for(int i=0;i<lists.length;i++)
+        {
+            ListNode v=lists[i];
+            while(v!=null)
+            {
+                s.add(v.val);
+                v=v.next;
+            }
+            
+        }
+        Collections.sort(s);
+        ListNode duplicate=new ListNode(0);
+        ListNode one=duplicate;
+        for(int i=0;i<s.size();i++)
+        {
+            one.next=new ListNode(s.get(i));
+            one=one.next;
+        }
+        return duplicate.next;
+        
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------
+34. Swap Nodes in Pairs
+
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode a=head;
+        while(a!=null && a.next!=null)
+        {
+            int n=a.val;
+            a.val=a.next.val;
+            a.next.val=n;
+            a=a.next.next;
+            
+        }
+        return head;
+        
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+35: Reverse Nodes in k-Group
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    ListNode rev=new ListNode(-1);
+    ListNode f=rev;
+    public ListNode reverse(ListNode node)
+    {
+        
+        ListNode prev=null;
+        ListNode curr=node;
+        ListNode post;
+        while(curr!=null)
+        {
+            post=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=post;
+        }
+        return prev;
+    }
+    ListNode ttt;
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode temp=head;
+        while(temp!=null)
+        {
+            ListNode dummy=new ListNode(-1);
+            ListNode fin=dummy;
+            for(int i=0;i<k;i++)
+            {
+                if(temp==null)
+                {
+                    ttt=dummy.next;
+                    f.next=ttt;
+                    return rev.next;
+                }
+                fin.next=new ListNode(temp.val);
+                fin=fin.next;
+                temp=temp.next;
+            }
+            ListNode rev=reverse(dummy.next);
+            f.next=rev;
+            while(f.next!=null)
+            {
+                f=f.next;
+            }         
+        }return rev.next;
+        
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+36:  Remove Duplicates from Sorted Array
+
+class Solution {
+    public int removeDuplicates(int[] nums)
+    {
+        ArrayList<Integer>li=new ArrayList<>();
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        int c=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(mp.containsKey(nums[i]))
+            {
+                mp.put(nums[i],mp.get(nums[i])+1);
+            }
+            else
+            {
+                nums[c]=nums[i];
+                c++;
+                mp.put(nums[i],1);
+            }
+        }
+        return c;
+            
+        
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+ 37: Remove Element
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        HashMap<Integer,Integer> mp=new HashMap<Integer,Integer>();
+        int p=0,o=0;;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==val)
+            {
+                o++;
+            }
+            else
+            {
+                nums[p]=nums[i];
+                p++;
+            }
+        }
+        return p;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+38: Find the Index of the First Occurrence in a String
+
+class Solution {
+    public int strStr(String h, String b)
+    {
+        if(h.contains(b))
+        {
+            return h.indexOf(b);
+        }
+        else
+        {
+            return -1;
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+39: Divide Two Integers
+
+--------------------------------------------------------------------------------------------------------------------------------
+40: Substring with Concatenation of All Words
+
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        int n = words.length;
+        HashMap<String, Integer> map = new HashMap<>();
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            map.put(words[i],map.getOrDefault(words[i],0)+1);
+        }
+        int k = words[0].length() * words.length;
+        int z = words[0].length();
+        int i = 0, j = 0;
+
+        while (j < s.length()) {
+            if (j - i + 1 == k) {
+                String sub = s.substring(i, j + 1);
+                HashMap<String, Integer> map2 = new HashMap<>();
+                int p = 0;
+                while (p < sub.length()) {
+                    String temp = sub.substring(p, p + z);
+                    map2.put(temp,map2.getOrDefault(temp,0)+1);
+                    p +=z;
+                }
+                if (map.equals(map2)){
+                    ans.add(i);
+                }
+                
+                i++;
+            }
+            
+            j++;
+        }
+        return ans;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+ 41: Next Permutation
+
+class Solution {
+    public void nextPermutation(int[] A) {
+        if (A == null || A.length <= 1) return;
+        int i = A.length - 2;
+        while (i >= 0 && A[i] >= A[i + 1]) i--;
+        if (i >= 0) {
+            int j = A.length - 1;
+            while (A[j] <= A[i]) j--;
+            swap(A, i, j);
+        }
+        reverse(A, i + 1, A.length - 1);
+    }
+
+    public void swap(int[] A, int i, int j) {
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+
+    public void reverse(int[] A, int i, int j) {
+        while (i < j) swap(A, i++, j--);
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+42: Longest Valid Parentheses
+
+class Solution {
+    public int longestValidParentheses(String s) {
+        int res=0;
+        Stack<Integer> st = new Stack<>();
+        st.push(-1);
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)=='(')
+            {
+                st.push(i);
+            }
+            else
+            {
+                if(!st.empty())
+                {
+                    st.pop();
+                }
+                if(!st.empty())
+                {
+                    res=Math.max(res,i-st.peek());
+                    System.out.println(res);
+                }
+                else
+                {
+                    st.push(i);
+                }
+                
+            }
+            
+        }
+        return res;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+ 43: Search in Rotated Sorted Array
+
+class Solution {
+    public int search(int[] nums, int target) {
+      int start=0;
+        int end=nums.length-1;
+        
+        while(start<=end){
+        int mid= start+(end-start) /2;
+        if(nums[mid]==target) return mid;
+        if(nums[start]<=nums[mid]){
+            if(target<=nums[mid] && target>=nums[start]){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        else{
+            if(target>=nums[mid] && target<=nums[end]){  
+                start=mid+1;
+            }else{
+                end=mid-1;
+            }
+        }
+        }
+        return -1;
+    }
+    
+}
+--------------------------------------------------------------------------------------------------------------------------------
+44: Find First and Last Position of Element in Sorted Array
+
+class Solution {
+    public static void lowerBound(int []nums,int target,int []ans){
+        int low=0,high=nums.length-1;
+        while(low<=high){
+            int mid=(low+high)>>1;
+            if(nums[mid]==target){
+                ans[0]=mid;
+                // search left side to find the first occurrence
+                high=mid-1;
+            }
+            else if(nums[mid]<target)   low=mid+1;
+            else high=mid-1;
+        }
+    }
+    public static void higherBound(int []nums,int target,int []ans){
+        int low=0,high=nums.length-1;
+        while(low<=high){
+            int mid=(low+high)>>1;
+            if(nums[mid]==target){
+                ans[1]=mid;
+                //search right side to find the last occurrence
+                low=mid+1;
+            }
+            else if(nums[mid]<target)   low=mid+1;
+            else high=mid-1;
+        }
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int []ans=new int[2];
+        Arrays.fill(ans,-1);
+        lowerBound(nums,target,ans);
+        higherBound(nums,target,ans);
+        return ans;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+45: Search Insert Position
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        if(target<nums[0]) return 0;
+        else{
+            int low = 0;
+            int high = nums.length-1;
+            int mid;
+            while (low<=high){
+                mid = low + (high-low)/2;
+                if(nums[mid]>target) high=mid-1;
+                else if(nums[mid]<target) low=mid+1;
+                else return mid;
+            }
+            return low;
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+46: Valid Sudoku
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j]!='.')
+                {
+                    for(int k=0;k<9;k++)
+                    {
+                        if(k!=j)
+                        {
+                            if(board[i][j]==board[i][k])
+                            {
+                                return false;
+                            }
+                        }
+                        if(k!=i)
+                        {
+                            if(board[i][j]==board[k][j])
+                            {
+                                return false;
+                            }
+                            
+                        }
+                    }
+                    int y=i-(i%3);
+                    int x=j-(j%3);
+                    for(int l=y;l<y+3;l++)
+                    {
+                        for(int m=x;m<x+3;m++)
+                        {
+                            if(l!=i && m!=j)
+                            {
+                                if(board[i][j]==board[l][m])
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }
+        return true;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+47: Sudoku Solver
+--------------------------------------------------------------------------------------------------------------------------------
+48: Count and Say
+
+class Solution {
+    public String countAndSay(int n) {
+        String x="1";
+        for(int i=1;i<n;i++)
+        {
+            String res="";
+            Stack<Character> st=new Stack<Character>();
+            ArrayList<Character> li=new ArrayList<Character>();
+            st.push(x.charAt(0));
+            li.add(x.charAt(0));
+            for(int j=1;j<x.length();j++)
+            {
+                if(x.charAt(j)==st.peek())
+                {
+                    li.add(x.charAt(j));
+                }
+                else
+                {
+                    res+=li.size()+String.valueOf(li.get(0));
+                    st.push(x.charAt(j));
+                    li.clear();
+                    li.add(x.charAt(j));
+                }
+            }
+            if(li.size()>0)
+            {
+                res+=li.size()+String.valueOf(li.get(0));
+            }
+            x=res;
+        }
+        return x;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+49: Combination Sum
+
+class Solution {
+    public void printcomb(int n,int ind,int target,int[] c,List<List<Integer>> comb,List<Integer> li)
+    {
+        if(n==ind)
+        {
+            if(target==0)
+            {
+                comb.add(new ArrayList<>(li));
+                return;
+            }
+            return;
+        }
+        if(target>= c[ind])
+        {
+            li.add(c[ind]);
+            printcomb(n,ind,target-c[ind],c,comb,li);
+            li.remove(li.size()-1);           
+        }
+        printcomb(n,ind+1,target,c,comb,li);
+        
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> li = new ArrayList<Integer>();
+        List<List<Integer>> comb = new ArrayList<>();
+        int ind=0;
+        int n=candidates.length;
+        printcomb(n,ind,target,candidates,comb,li);
+        return comb;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+50: Combination Sum II
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] cand, int target)
+    {
+        List<List<Integer>> comb2=new ArrayList<>();
+        Arrays.sort(cand);
+        printcomb2(0,target,cand,comb2,new ArrayList<>());
+        return comb2;
+    }
+    public void printcomb2(int ind,int target,int[] cand,List<List<Integer>>comb2,ArrayList<Integer> ki)
+    {
+        if(target==0)
+        {
+            comb2.add(new ArrayList<>(ki));
+            return;
+        }
+        for(int i=ind;i<cand.length;i++)
+        {
+            if(i!=ind && cand[i]==cand[i-1])
+            {
+                continue;
+            }
+            if(cand[i]>target)break;
+            
+            ki.add(cand[i]);
+            // help.set(i,1);
+            printcomb2(i+1,target-cand[i],cand,comb2,ki);
+            ki.remove(ki.size()-1);
+        }
+        
+   }
+    
+}
+--------------------------------------------------------------------------------------------------------------------------------
+ 51: First Missing Positive
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int c=1;
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==c)
+            {
+                c++;
+            }
+        }
+        return c;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+52: Trapping Rain Water
+
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int sum=0;
+        int l[]=new int[n];
+        int r[]=new int[n];
+        int ll=0,rr=0;
+        for(int i=0; i<n; i++){
+           if(height[i]>ll){
+               l[i]=height[i];
+               ll=height[i];
+           }
+           else{
+               l[i]=ll;
+           }
+           if(height[n-i-1]>rr){
+               r[n-i-1]=height[n-i-1];
+               rr=height[n-i-1];
+           }
+           else{
+               r[n-i-1]=rr;
+           }
+        }
+        for(int i=0; i<n; i++){
+          //  System.out.println(height[i]+" "+l[i]+" "+r[i]);
+            sum+=Math.min(l[i],r[i])-height[i];
+            
+        }
+        return sum;
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+53: Multiply Strings
+
+public String multiply(String num1, String num2) {
+    int m = num1.length(), n = num2.length();
+    int[] pos = new int[m + n];
+   
+    for(int i = m - 1; i >= 0; i--) {
+        for(int j = n - 1; j >= 0; j--) {
+            int mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0'); 
+            int p1 = i + j, p2 = i + j + 1;
+            int sum = mul + pos[p2];
+
+            pos[p1] += sum / 10;
+            pos[p2] = (sum) % 10;
+        }
+    }  
+    
+    StringBuilder sb = new StringBuilder();
+    for(int p : pos) if(!(sb.length() == 0 && p == 0)) sb.append(p);
+    return sb.length() == 0 ? "0" : sb.toString();
+}
+--------------------------------------------------------------------------------------------------------------------------------
+54: Wildcard Matching
+--------------------------------------------------------------------------------------------------------------------------------
+55: Jump Game II
+
+
+class Solution {
+    public int jump(int[] nums) {
+        
+          for(int i = 1; i < nums.length; i++)
+          {
+            nums[i] = Math.max(nums[i] + i, nums[i-1]);
+          }
+
+      int ind = 0;
+      int ans = 0;
+
+      while(ind < nums.length- 1)
+      {
+        ans++;
+        ind = nums[ind];
+      }
+
+      return ans;
+        
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+56: Permutations
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        //permutations with each nums[i] at the end of list
+        if (nums.length == 1) { 
+            //base case: only 1 element in the given array - only 1 permutation
+            //the only permutation:
+            ArrayList<Integer> lis = new ArrayList<Integer>();
+            lis.add(nums[0]);
+            //add to list of permutation(s):
+            res.add(lis);   
+            return res;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            //list of permutations of other elements in given array
+            List<List<Integer>> temp = permute(arrayRemove(nums, i));
+            //add nums[i] to the end of each permutation:
+            for (List lis: temp) {
+                lis.add(nums[i]);
+            }
+            //add to list of permutations:
+            res.addAll(temp);   
+        }
+        return res;
+    }
+    
+    private int[] arrayRemove(int[] arr, int index) {
+        int[] re = new int[arr.length-1];
+        int j = 0;
+        for (int i = 0; i<arr.length; i++) {
+            if (i==index) continue;
+            re[j++] = arr[i];
+        }
+        return re;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+57: Permutations II
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        permuteUnique(nums, res, new ArrayList<>(), map);
+        return res;
+    }
+    private void permuteUnique(int[] nums, List<List<Integer>> res, List<Integer> temp, HashMap<Integer, Integer> map) {
+        if(temp.size() == nums.length) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()) {
+            if(entry.getValue() > 0) {
+                temp.add(entry.getKey());
+                map.put(entry.getKey(), entry.getValue() - 1);
+                permuteUnique(nums, res, temp, map);
+                map.put(entry.getKey(), entry.getValue() + 1);
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+58: Rotate Image
+
+class Solution {
+public void rotate(int[][] matrix) {
+    int  l = matrix.length;
+    for(int i = 0 ; i<l;i++){
+        for(int j = i+1; j<l;j++){
+            int temp = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = temp;
+        }
+    }
+    for(int i = 0 ; i<l;i++){
+        for(int j = 0; j<l/2;j++){
+            int temp = matrix[i][j];
+            matrix[i][j] = matrix[i][l-j-1];
+            matrix[i][l-j-1] = temp;
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+59: Group Anagrams
+
+import java.util.AbstractList;
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        
+        Map<String, List<String>> map = new HashMap<>();
+        
+        return new AbstractList<List<String>>(){
+            
+            List<List<String>> result;
+            public List<String> get(int index) {
+                if (result == null) init();
+                return result.get(index);
+            }
+
+            public int size() {
+                if (result == null) init();
+                return result.size();
+            }
+
+            private void init() {
+                for (String s: strs) {
+                    char[] keys = new char[26];
+                    for (int i = 0; i < s.length(); i++)
+                        keys[s.charAt(i) - 'a']++;
+
+                    String key = new String(keys);
+                    System.out.println(key);
+                    List<String> list = map.get(key);
+                    if (list == null) map.put(key, new ArrayList<>());
+                    map.get(key).add(s);
+                }
+                result = new ArrayList<>(map.values());
+            }
+        };
+    
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+60: Pow(x, n)
+class Solution {
+    public double myPow(double x, int n) {
+        double ans=1.0;
+        long nn=n;
+        if(nn<0) nn= -1 * nn;
+        while(nn>0){
+            if(nn%2==1){
+                ans=ans*x;
+                nn=nn-1;
+            }
+            else{
+                x=x*x;
+                nn=nn/2;
+            }
+        }
+        if(n<0) ans=(double)(1.0)/(double)(ans);    //if it is negetive
+        return ans;
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+61: N-Queens
+--------------------------------------------------------------------------------------------------------------------------------
+ 62: N-Queens II
+--------------------------------------------------------------------------------------------------------------------------------
+63: Maximum Subarray
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int msf=nums[0];
+        int men=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            men+=nums[i];
+            if(msf<men)
+            {
+                msf=men;
+            }
+            if(men<0)
+            {
+                men=0;
+            }
+        }
+        return msf;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+64: Spiral Matrix
+
+class Solution {
+   public List spiralOrder(int[][] matrix)
+{
+List list=new ArrayList();
+int row=matrix.length;
+if(row==0) return list;
+int col=matrix[0].length;
+
+    int t=0,l=0,r=col-1,b=row-1,d=0;
+    
+    while(l<=r && t<=b)
+    {
+        if(d==0)
+        {
+            for(int i=l;i<=r;i++)
+            {
+                list.add(matrix[t][i]);
+            }
+            d=1;t++;
+        }
+        else if(d==1)
+        {
+            for(int i=t;i<=b;i++)
+            {
+                list.add(matrix[i][r]);
+            }
+            d=2;r--;
+        }
+        else if(d==2)
+        {
+            for(int i=r;i>=l;i--)
+            {
+                list.add(matrix[b][i]);
+            }
+            d=3;b--;
+        }
+        else if(d==3)
+        {
+            for(int i=b;i>=t;i--)
+            {
+                list.add(matrix[i][l]);
+            }
+            d=0;l++;
+        }
+    }
+    return list;
+}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------
+65: Jump Game
+
+class Solution {
+    public boolean canJump(int[] nums) {
+
+        int n= nums.length;
+        int result=0;
+
+        for(int i=0;i<n;i++)
+        {
+            if(result<i)
+            {
+                return false;
+            }
+            result=Math.max(result,i+nums[i]);
+        }
+        return true;    
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+66: Merge Intervals
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        List<int[]> result = new ArrayList<>();
+        int n = intervals.length;
+        
+        if(n==0 || intervals == null) return intervals;
+        //we sort by first value
+        Arrays.sort(intervals, (a,b) -> (a[0]-b[0]));
+        int[]temp = intervals[0];
+        for(int i=1;i<n;i++){
+            if(intervals[i][0]<=temp[1]){
+                temp[1] = Math.max(intervals[i][1], temp[1]);
+                temp[0] = Math.min(intervals[i][0], temp[0]);
+            }
+			else{
+                result.add(temp);
+                temp = intervals[i];
+            }
+        }
+
+        result.add(temp);
+        return result.toArray(new int[result.size()][2]);
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+ 67: Insert Interval
+
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int i = 0;
+        while (i < intervals.length && newInterval[0] > intervals[i][1]) {
+            i++;
+        }
+        int start = i;
+
+        while (i < intervals.length && newInterval[1] >= intervals[i][0]) {
+            i++;
+        }
+
+        int end = i;
+        int curIntervalCounter = 0;
+        int[][] finalIntervals = new int[intervals.length - end + start + 1][];
+
+        for (curIntervalCounter = 0; curIntervalCounter < start; curIntervalCounter++) {
+            int[] interval = new int[2];
+            interval[0] = intervals[curIntervalCounter][0];
+            interval[1] = intervals[curIntervalCounter][1];
+            finalIntervals[curIntervalCounter] = interval;
+        }
+
+        if (start == end) {
+            int[] interval = new int[2];
+            interval[0] = newInterval[0];
+            interval[1] = newInterval[1];
+            finalIntervals[curIntervalCounter++] = interval;
+        } else {
+            int[] mergedInterval = new int[2];
+            mergedInterval[0] = Math.min(newInterval[0], intervals[start][0]);
+            mergedInterval[1] = Math.max(newInterval[1], intervals[end - 1][1]);
+            finalIntervals[curIntervalCounter++] = mergedInterval;
+        }
+
+        for (int j = end; j < intervals.length; j++) {
+            int[] interval = new int[2];
+            interval[0] = intervals[j][0];
+            interval[1] = intervals[j][1];
+            finalIntervals[curIntervalCounter++] = interval;
+        }
+
+        return finalIntervals;
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+68: Length of Last Word
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int i = s.length()-1;
+        int l =0;
+        while (s.charAt(i)==' ')
+        {
+            i--;
+        }
+        while (i>=0&&s.charAt(i)!=' ')
+        {
+            i--;
+            l++;
+        }
+        return l;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+69: Spiral Matrix II
+--------------------------------------------------------------------------------------------------------------------------------
+70: Permutation Sequence
+
+class Solution {
+    public String getPermutation(int n, int k) {
+        int colsize = 1;
+        List<Integer> ans = new ArrayList<>();
+        for(int i = 1; i<n;i++){
+            colsize = colsize * i;
+            ans.add(i);
+        }
+        ans.add(n);
+
+        String res = "";
+        k = k-1;
+        while(true){
+          res = res + ans.get(k/colsize);
+          ans.remove(k/colsize);
+
+          if (ans.size()==0){
+              break;
+          }
+
+          k = k%colsize;
+          colsize = colsize/ans.size();
+        }
+
+        return res;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+71: Rotate List
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode curr=head;
+        ListNode last=head;
+        int size=this.count(head);
+        
+        if(head==null||head.next==null||k==0) {
+            return head;
+        }
+        k=k%size;
+        while(k>0) {
+        
+            while(curr.next!=null) {
+            last=curr;
+            curr=curr.next;
+            }
+
+            last.next=null;
+            curr.next=head;
+            head=curr;
+
+            k--;
+
+        }
+        return head;
+    }
+    public int count(ListNode head) {
+        ListNode dummyHead=head;
+        int count=0;
+        while(dummyHead!=null) {
+            dummyHead=dummyHead.next;
+            count++;
+        }
+        return count;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+72: Unique Paths
+--------------------------------------------------------------------------------------------------------------------------------
+ 73: Unique Paths II
+--------------------------------------------------------------------------------------------------------------------------------
+ 74: Minimum Path Sum
+
+class Solution {
+    public int minPathSum(int[][] grid) {
+    int i = grid.length-1;
+    while(i>=0)
+    {
+        for(int j=grid[0].length-1; j>=0; j--)
+        {
+            if(i == grid.length-1 && j== grid[0].length-1)
+            {
+                grid[i][j] = grid[i][j];
+            }
+            else if( i == grid.length-1)
+            {
+                grid[i][j] += grid[i][j+1];
+            }
+            else if( j == grid[0].length-1)
+            {
+                grid[i][j] += grid[i+1][j];
+            }
+            else
+            {
+                grid[i][j] += Math.min( grid[i][j+1], grid[i+1][j]);
+            }
+        }
+        i--;
+    }
+   
+    return grid[0][0];
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------
+75: Valid Number
+
+import java.util.*;
+import java.util.regex.*;
+class Solution {
+    public boolean isNumber(String s) {
+    s=s.toLowerCase();
+     Pattern p=Pattern.compile("[+-]?((\\d+)|((\\d+\\.)|(\\d+\\.\\d+)|(\\.\\d+)))(e[+-]?\\d+)?");
+     Matcher m=p.matcher(s);
+     boolean b=m.matches();
+     if(b)
+        {
+            return true;
+        }
+        return false;
+    }
+}
+ 
